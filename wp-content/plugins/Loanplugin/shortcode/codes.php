@@ -18,22 +18,22 @@ function callback_financial_calculator($atts, $content = null) {
     $HTML .= "<div class='calculatorInner row d-flex justify-content'>";
     switch ($CALTYPE) {
         case 'mortgage_payments':
-            $HTML .= "<div class='col PropertyValue'><label>Property Value (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
-                    . "<div class='col LoanTerm'><label>Loan Term (months)</label><input type='text'></div>"
-                    . "<div class='col APR'><label>APR (%)</label><input type='text'></div>"
-                    . "<div class='col deposit'><label>deposit (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
+            $HTML .= "<div class='col PropertyValue'><label>Property Value (" . Currency($CURRENCY) . ")</label><input class='validation' data-max='4000000' type='text'></div>"
+                    . "<div class='col LoanTerm'><label>Loan Term (months)</label><input class='validation' data-max='360' type='text'></div>"
+                    . "<div class='col APR'><label>APR (%)</label><input class='validation' data-max='20' type='text'></div>"
+                    . "<div class='col deposit'><label>deposit (" . Currency($CURRENCY) . ")</label><input class='diposit' data-max='4000000' type='text'></div>"
                     . "<div class='col btns'><label>deposit</label><input type='button' value='Calculate'></div>";
             break;
         case 'business_loan':
-            $HTML .= "<div class='col Amount'><label>Amount (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
-                    . "<div class='col LoanTerm'><label>Loan Term (months)</label><input type='text'></div>"
-                    . "<div class='col APR'><label>APR (%)</label><input type='text'></div>"
+            $HTML .= "<div class='col Amount'><label>Amount (" . Currency($CURRENCY) . ")</label><input class='validation' data-max='5000000' type='text'></div>"
+                    . "<div class='col LoanTerm'><label>Loan Term (months)</label><input class='validation' data-max='96' type='text'></div>"
+                    . "<div class='col APR'><label>APR (%)</label><input  class='validation' data-max='30'  type='text'></div>"
                     . "<div class='col btns'><label>deposit</label><input type='button' value='Calculate'></div>"
                     . "<div class='col btns'><label>deposit</label></div>";
             break;
         case 'balance_transfer':
             $HTML .= "<div class='col Amount'><label>Amount (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
-                    . "<div class='col APR'><label>APR (%)</label><input type='text'></div>"
+                    . "<div class='col APR'><label>APR (%)</label><input class='validation' data-max='20' type='text'></div>"
                     . "<div class='col aproffset'><label>apr offset</label><input type='text'></div>"
                     . "<div class='col paymentamount'><label>payment amount (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
                     . "<div class='col'></div></div>"
@@ -42,38 +42,38 @@ function callback_financial_calculator($atts, $content = null) {
             break;
         case 'life_of_balance_card_repayments':
             $HTML .= "<div class='col amount'><label>amount (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
-                    . "<div class='col APR'><label>APR (%)</label><input type='text'></div>"
+                    . "<div class='col APR'><label>APR (%)</label><input class='validation' data-max='20' type='text'></div>"
                     . "<div class='col paymenttype'><label>payment type</label><input type='text'></div>"
                     . "<div class='col paymentamount'><label>payment amount (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
                     . "<div class='col btns'><label>deposit</label><input type='button' value='Calculate'></div>";
             break;
         case 'car_financing':
-            $HTML .= "<div class='col amount'><label>amount (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
-                    . "<div class='col LoanTerm'><label>Loan Term (months)</label><input type='text'></div>"
-                    . "<div class='col APR'><label>APR (%)</label><input type='text'></div>"
-                    . "<div class='col deposit'><label>deposit (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
+            $HTML .= "<div class='col amount'><label>amount (" . Currency($CURRENCY) . ")</label><input class='validation' data-max='10000000'  type='text'></div>"
+                    . "<div class='col LoanTerm'><label>Loan Term (months)</label><input class='validation' data-max='360' type='text'></div>"
+                    . "<div class='col APR'><label>APR (%)</label><input class='validation' data-max='30' type='text'></div>"
+                    . "<div class='col deposit'><label>deposit (" . Currency($CURRENCY) . ")</label><input class='validation' data-max='10000000'  type='text'></div>"
                     . "<div class='col btns'><label>deposit</label><input type='button' value='Calculate'></div>";
             break;
         case 'credit_card_repayments':
-            $HTML .= "<div class='col amount'><label>amount (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
-                    . "<div class='col APR'><label>APR (%)</label><input type='text'></div>"
+            $HTML .= "<div class='col amount'><label>amount (" . Currency($CURRENCY) . ")</label><input class='validation' data-max='100000' type='text'></div>"
+                    . "<div class='col APR'><label>APR (%)</label><input class='validation' data-max='39' type='text'></div>"
                     . "<div class='col paymenttype'><label>payment type</label><input type='text'></div>"
-                    . "<div class='col paymentamount'><label>payment amount (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
+                    . "<div class='col paymentamount'><label>payment amount (" . Currency($CURRENCY) . ")</label><input class='validation' data-max='50000' type='text'></div>"
                     . "<div class='col btns'><label>deposit</label><input type='button' value='Calculate'></div>";
             $HEADING_TOTAL = 'Total Amount Paid';
             $HEADING_MONTHLY = 'Loan Term (Months)';
             break;
         case 'hcstc_loan':
-            $HTML .= "<div class='col amount'><label>amount (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
-                    . "<div class='col LoanTerm'><label>Loan Term (months)</label><input type='text'></div>"
-                    . "<div class='col APR'><label>APR (%)</label><input type='text'></div>"
-                    . "<div class='col btns'><label>deposit</label><input type='button' value='Calculate'></div>";
+            $HTML .= "<div class='col amount'><label>amount (" . Currency($CURRENCY) . ")</label><input class='validation' data-max='4000000' type='text'></div>"
+                    . "<div class='col LoanTerm'><label>Loan Term (months)</label><input class='validation' data-max='60' type='text'></div>"
+                    . "<div class='col APR'><label>APR (%)</label><input class='validation' data-max='21' type='text'></div>"
+                    . "<div class='col btns'><label>deposit</label><input class='validation' min='0' data-max='4000000' type='button' value='Calculate'></div>";
             break;
         case 'secured_loan':
-            $HTML .= "<div class='col amount'><label>amount (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
-                    . "<div class='col LoanTerm'><label>Loan Term (months)</label><input type='text'></div>"
-                    . "<div class='col APR'><label>APR (%)</label><input type='text'></div>"
-                    . "<div class='col propertyvalue'><label>property value (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
+            $HTML .= "<div class='col amount'><label>amount (" . Currency($CURRENCY) . ")</label><input class='validation' data-max='105000000' type='text'></div>"
+                    . "<div class='col LoanTerm'><label>Loan Term (months)</label><input class='validation' data-max='180' type='text'></div>"
+                    . "<div class='col APR'><label>APR (%)</label><input class='validation' data-max='14' type='text'></div>"
+                    . "<div class='col propertyvalue'><label>property value (" . Currency($CURRENCY) . ")</label><input class='validation' data-max='100000000' type='text'></div>"
                     . "<div class='col'></div></div>"
                     . "<div class='row calculatorInner row d-flex justify-content'><div class='col mortgagebalance'><label>mortgage balance (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
                     . "<div class='col btns'><label>deposit</label><input type='button' value='Calculate'></div><div class='col'></div><div class='col'></div><div class='col'></div>";

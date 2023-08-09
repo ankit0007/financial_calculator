@@ -7,6 +7,12 @@
   font-family: "montserrat";
   src: url("../fonts/MontserratRegular.eot");
   src: url("../fonts/MontserratRegular.eot") format("embedded-opentype"), url("../fonts/MontserratRegular.woff2") format("woff2"), url("../fonts/MontserratRegular.woff") format("woff"), url("../fonts/MontserratRegular.ttf") format("truetype"), url("../fonts/MontserratRegular.svg#MontserratRegular") format("svg");
+} .error{
+  font-size: 0.7REM;
+    color: RED;
+    FONT-WEIGHT: 500;
+    LINE-HEIGHT: 14PX;
+    DISPLAY: BLOCK;
 }
 .JAWNZQXODUZZWQ2, .DZKN2ZHMMZHMZCZ, .DY1ODFJMWQYZWI3 {
   width: 100%;

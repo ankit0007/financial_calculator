@@ -1,4 +1,26 @@
 (function ($) {
+    $(document).on('keydown', '.validation,.diposit', function () {
+        let Datas = parseInt($(this).attr('data-max'));
+        let vals = parseInt($(this).val());
+        $(this).attr('data-amount', vals);
+
+    });
+    $(document).on('keyup', '.validation,.diposit', function () {
+        $('.error').remove();
+        let Datas = parseInt($(this).attr('data-max'));
+        let Oldvals = parseInt($(this).attr('data-amount'));
+        let vals = parseInt($(this).val());
+        if (vals > Datas) {
+            $(this).val(Oldvals);
+            $(this).after('<span class="error">Please Enter Maximum Value is '+Datas+'</span>');
+        }
+        var intRegex = /^[+-]?\d+(\.\d+)?([eE][+-]?\d+)?$/;        
+        if (!intRegex.test(vals)) {
+            
+            $(this).after('<span class="error">Please Enter  Number Only</span>');
+        }
+        
+    });
     $(document).on('click', '.btns input', function () {
         fun = $(this).parents('.mainbox').data('function');
         console.log('financial_type_', fun);
@@ -54,6 +76,7 @@ function mortgage_payments(Nclass) {
     // Message
     const message = `A ${year} year mortgage of £${price} with a £${deposit} deposit at ${apr}% apr will be a monthly payment of £${monthlypay} with a total amount £${totalpay}. Interest only payments will be £${interest} a month.`;
     console.log(message);
+    
     Nclass.find('.totalpay span').html(totalpay.toFixed(2));
     Nclass.find('.permonthpay span').html(monthlypay.toFixed(2));
     return message;
@@ -131,7 +154,7 @@ function balance_transfer(Nclass) {
 
 function car_financing(Nclass) {
     let price = parseFloat(Nclass.find('.amount input').val());
-    let  period = parseFloat(Nclass.find('.LoanTerm input').val());
+    let period = parseFloat(Nclass.find('.LoanTerm input').val());
     let apr = parseFloat(Nclass.find('.APR input').val());
     let deposit = parseFloat(Nclass.find('.deposit input').val());
 
@@ -237,8 +260,8 @@ function hcstc_loan_calc(Nclass) {
         Nclass.find('.permonthpay span').html(monthlypay.toFixed(2));
     }
 
-//    Nclass.find('.totalpay span').html(totalpay);
-//    Nclass.find('.permonthpay span').html(monthlypay);
+    //    Nclass.find('.totalpay span').html(totalpay);
+    //    Nclass.find('.permonthpay span').html(monthlypay);
     console.log(message);
     return message;
 }
