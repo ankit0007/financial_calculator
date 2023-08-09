@@ -1,0 +1,35 @@
+.JAWNZQXODUZZWQ2,
+.DZKN2ZHMMZHMZCZ,
+.DY1ODFJMWQYZWI3{
+    &.mainbox{
+        overflow: hidden !important;
+        .boxesinMobile{
+            .whitebox,.col20per{
+                width: 100%;
+                max-width: 100%;
+                min-width: 100%;
+                padding: 0.5rem 2rem;
+                .calculatorInner{
+                    .col{
+                        flex: unset;
+                        input{
+                            padding-left: 0px !important;
+                            border: 2px solid;
+                        }
+                    }
+                }
+            }
+            .col20per{
+                padding-top: 1.5rem;
+            }
+        }
+
+        .note{
+            position: unset !important;
+            width: 100% !important;
+            margin-top: 1.5rem;
+        }
+    }
+
+}
+
