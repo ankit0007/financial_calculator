@@ -5,6 +5,20 @@
         $(this).attr('data-amount', vals);
 
     });
+    jQuery(document).on('keyup' , '.deposit input,.PropertyValue input,.amount input' , function() {
+        $('.errors').remove();
+        console.log(price=parseFloat(jQuery(this).parents('.calculatorInner').find('.PropertyValue input').val()));
+        console.log(amount=parseFloat($(this).parents('.calculatorInner').find('.amount input').val()));
+        
+        let deposit = parseFloat(jQuery(this).val());
+        //alert("hello" +deposit);
+        if(deposit >= price || deposit >= amount){
+            //alert('helllo');
+            jQuery(this).parents('.calculatorInner').find('.deposit input').after('<span class="errors">Your Value should be less than loan amount</span>');
+            
+        }
+       
+    });
     $(document).on('keyup', '.validation,.diposit', function () {
         $('.error').remove();
         let Datas = parseInt($(this).attr('data-max'));
@@ -64,7 +78,6 @@ function mortgage_payments(Nclass) {
     let apr = parseFloat(Nclass.find('.APR input').val());
     let deposit = parseFloat(Nclass.find('.deposit input').val());
 
-
     // Creating inputs for calculator
     const loan = price - deposit;
     const aprinput = (apr / 100) / 12;
@@ -77,8 +90,13 @@ function mortgage_payments(Nclass) {
     const message = `A ${year} year mortgage of £${price} with a £${deposit} deposit at ${apr}% apr will be a monthly payment of £${monthlypay} with a total amount £${totalpay}. Interest only payments will be £${interest} a month.`;
     console.log(message);
     
-    Nclass.find('.totalpay span').html(totalpay.toFixed(2));
+    if(isNaN(monthlypay) || isNaN(totalpay))
+    {
+        monthlypay=0.00;
+        
+    }
     Nclass.find('.permonthpay span').html(monthlypay.toFixed(2));
+    Nclass.find('.totalpay span').html(totalpay.toFixed(2));
     return message;
 }
 
@@ -104,12 +122,14 @@ function business_loan_calc(Nclass) {
     // Message
     const message = `A loan of £${loanamount} over ${period} months at ${apr}% apr will be a total of £${totalpay} at a monthly payment of £${monthlypay}`;
     console.log(message);
+    if(isNaN(monthlypay) || isNaN(totalpay))
+    {
+        monthlypay=0.00;
+    }
     Nclass.find('.totalpay span').html(totalpay.toFixed(2));
     Nclass.find('.permonthpay span').html(monthlypay.toFixed(2));
     return message;
 }
-
-
 
 // Logic for balance transfer
 function balance_transfer(Nclass) {
@@ -146,6 +166,11 @@ function balance_transfer(Nclass) {
     // Message
     const message = `To clear your balance of £${balance} with a monthly payment of £${payment_amount} at ${offset_interest}% apr for the first ${apr_offset} months followed by ${apr}% apr you would need to pay a total of £${totalpay} over a period of ${term} months. Interest is £${interest}`;
     console.log(message);
+    if(isNaN(monthlypay) || isNaN(totalpay))
+    {
+        monthlypay=0.00;
+        
+    }
     Nclass.find('.totalpay span').html(totalpay.toFixed(2));
     Nclass.find('.permonthpay span').html(interest.toFixed(2));
     return message;
@@ -176,6 +201,11 @@ function car_financing(Nclass) {
 
     // Message
     const message = `You could borrow £${loan} over ${period} months at ${apr}% apr with a monthly payment of £${monthlypay} with a total amount £${totalpay} payable plus your initial £${deposit} deposit`;
+    if(isNaN(monthlypay) || isNaN(totalpay))
+    {
+        monthlypay=0.00;
+       
+    }
     Nclass.find('.totalpay span').html(totalpay.toFixed(2));
     Nclass.find('.permonthpay span').html(monthlypay.toFixed(2));
     return message;
@@ -213,6 +243,11 @@ function credit_card_repayments(Nclass) {
     // Message
     const message = `To clear your balance of £${balance} with a monthly ${payment_type} payment of £${payment_amount} at ${apr}% apr you would need to pay a total of £${totalpay} over a period of ${term} months`;
     console.log(message);
+    if(isNaN(monthlypay) || isNaN(totalpay))
+    {
+        monthlypay=0.00;
+       
+    }
     Nclass.find('.totalpay span').html(totalpay.toFixed(2));
     Nclass.find('.permonthpay').html(term + '/Months');
     return message;
@@ -256,6 +291,11 @@ function hcstc_loan_calc(Nclass) {
 
     } else {
         message = `A loan of £${loanamount} over ${period} months at ${apr}% apr will be a total of £${totalpay} at a monthly payment of £${monthlypay}. This loan has been capped at twice the loan amount`;
+        if(isNaN(monthlypay) || isNaN(totalpay))
+    {
+        monthlypay=0.00;
+       
+    }
         Nclass.find('.totalpay span').html(totalpay.toFixed(2));
         Nclass.find('.permonthpay span').html(monthlypay.toFixed(2));
     }
@@ -298,6 +338,11 @@ function secured_loan_calc(Nclass) {
 
     } else {
         message = `A loan of £${loanamount} over ${period} months at ${apr}% apr will be a total of £${totalpay} at a monthly payment of £${monthlypay}`;
+        if(isNaN(monthlypay) || isNaN(totalpay))
+    {
+        monthlypay=0.00;
+       
+    }
         Nclass.find('.totalpay span').html(totalpay.toFixed(2));
         Nclass.find('.permonthpay span').html(monthlypay.toFixed(2));
     }
