@@ -3,8 +3,8 @@
   Plugin Name: Financial Calculator
   Description: Custom post type and fields for Financial Calculator.
   Version: 1.0
-  Author: Your Name
-  Author URI: Your Website
+  Author: Sansar gupta
+  Author URI: https://seomasterteam.com
  */
 
 // Create the custom post type
