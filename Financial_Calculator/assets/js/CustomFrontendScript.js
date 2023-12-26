@@ -25,6 +25,7 @@
         fun = $(this).parents('.mainbox').data('function');
         console.log('financial_type_', fun);
         Nclass = $('.financial_type_' + fun);
+        //alert(fun);
         switch (fun) {
             case 'mortgage_payments':
                 mortgage_payments(Nclass);
@@ -222,6 +223,7 @@ function credit_card_repayments(Nclass) {
 
 
 function hcstc_loan_calc(Nclass) {
+    console.log('Class:-',Nclass);
     let loanamount = parseFloat(Nclass.find('.amount input').val());
     let period = parseInt(Nclass.find('.LoanTerm input').val());
     let apr = parseFloat(Nclass.find('.APR input').val());
@@ -256,12 +258,11 @@ function hcstc_loan_calc(Nclass) {
 
     } else {
         message = `A loan of £${loanamount} over ${period} months at ${apr}% apr will be a total of £${totalpay} at a monthly payment of £${monthlypay}. This loan has been capped at twice the loan amount`;
-        Nclass.find('.totalpay span').html(totalpay.toFixed(2));
-        Nclass.find('.permonthpay span').html(monthlypay.toFixed(2));
+        
     }
 
-    //    Nclass.find('.totalpay span').html(totalpay);
-    //    Nclass.find('.permonthpay span').html(monthlypay);
+        Nclass.find('.totalpay span').html(totalpay.toFixed(2));
+        Nclass.find('.permonthpay span').html(monthlypay.toFixed(2));
     console.log(message);
     return message;
 }
