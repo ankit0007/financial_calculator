@@ -1,6 +1,5 @@
 <?php
 
-
 function create_financial_calculator_post_type() {
     $labels = array(
         'name' => 'Financial Calculators',
@@ -66,15 +65,15 @@ function financial_type_callback($post) {
     </select>
     <style>
         select{
-        width:100%;
-}
+            width:100%;
+        }
     </style>
     <script>
         jQuery(document).ready(function ($) {
             $(document).on('change', '#financial_type', function (e) {
                 if ($(this).val().length > 2) {
                     console.log($('#financial_type option:selected').text());
-                                      
+
                     $('#title').val($('#financial_type option:selected').text().split('_').join(' '));
                 }
                 e.preventDefault();
@@ -98,8 +97,6 @@ function color_callback($post) {
     <?php
 }
 
-
-
 function MoneySign_callback($post) {
     wp_nonce_field('color_meta_box', 'color_nonce');
     $color = get_post_meta($post->ID, 'moneysign', true);
@@ -116,17 +113,14 @@ function MoneySign_callback($post) {
     <?php
 }
 
-
-
-
 // Save meta box data
 function financial_calculator_save_meta_boxes($post_id) {
     if (!isset($_POST['financial_type_nonce']) || !isset($_POST['color_nonce'])) {
         return;
     }
 
-    if (!wp_verify_nonce($_POST['financial_type_nonce'], 'financial_type_meta_box') ||
-            !wp_verify_nonce($_POST['color_nonce'], 'color_meta_box')) {
+    if (!wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['financial_type_nonce'])), 'financial_type_meta_box') ||
+            !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['color_nonce'])), 'color_meta_box')) {
         return;
     }
 
@@ -145,11 +139,10 @@ function financial_calculator_save_meta_boxes($post_id) {
     if (isset($_POST['color'])) {
         update_post_meta($post_id, 'color', sanitize_text_field($_POST['color']));
     }
-    
+
     if (isset($_POST['moneysign'])) {
         update_post_meta($post_id, 'moneysign', sanitize_text_field($_POST['moneysign']));
     }
-    
 }
 
 add_action('save_post', 'financial_calculator_save_meta_boxes');
@@ -178,7 +171,7 @@ function financial_calculator_shortcode($atts) {
         ob_start();
         ?>
         <ul>
-            <?php while ($query->have_posts()) : $query->the_post(); ?>
+        <?php while ($query->have_posts()) : $query->the_post(); ?>
                 <li>
                     <h3><?php the_title(); ?></h3>
                     <p>Financial Type: <?php echo get_post_meta(get_the_ID(), 'financial_type', true); ?></p>
@@ -303,8 +296,8 @@ add_filter('manage_financial_calculator_posts_columns', 'lc_modify_wp_list_table
 function lc_populate_wp_list_table_column($column, $post_id) {
     if ($column === 'shortcode') {
         $title = get_the_title($post_id);
-         $CALCOLOR = (get_post_meta($post_id, 'color', true));
-        echo '<div class="shortcodes" style="color:#fff;background:#'.$CALCOLOR.'">[financial_calculator id="' . $post_id . '" title="' . $title . '"]</div>';
+        $CALCOLOR = (get_post_meta($post_id, 'color', true));
+        echo '<div class="shortcodes" style="color:#fff;background:#' . $CALCOLOR . '">[financial_calculator id="' . $post_id . '" title="' . $title . '"]</div>';
         ?>
         <style>
             .shortcodes{

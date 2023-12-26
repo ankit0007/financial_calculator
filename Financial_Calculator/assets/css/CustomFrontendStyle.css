@@ -134,6 +134,14 @@
   background: #74a050;
 }
 
+.error {
+  font-size: 0.7rem;
+  color: RED;
+  font-weight: 500;
+  line-height: 14px;
+  display: BLOCK;
+}
+
 @media screen and (max-width: 700px) {
   html body .JAWNZQXODUZZWQ2.mainbox,
   html body .DZKN2ZHMMZHMZCZ.mainbox,
@@ -188,12 +196,5 @@
     position: unset !important;
     width: 100% !important;
     margin-top: 1.5rem;
-  }
-  .error {
-    font-size: 0.7rem;
-    color: RED;
-    font-weight: 500;
-    line-height: 14px;
-    display: BLOCK;
   }
 }
