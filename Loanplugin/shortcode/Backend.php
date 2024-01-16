@@ -1,6 +1,4 @@
 <?php
-
-
 function create_financial_calculator_post_type() {
     $labels = array(
         'name' => 'Financial Calculators',
@@ -39,42 +37,46 @@ function create_financial_calculator_post_type() {
 
 add_action('init', 'create_financial_calculator_post_type');
 
-// Add custom meta boxes for financial type and color
 function financial_calculator_add_meta_boxes() {
     add_meta_box('financial_type', 'Financial Type', 'financial_type_callback', 'financial_calculator', 'normal', 'default');
     add_meta_box('color', 'Color', 'color_callback', 'financial_calculator', 'normal', 'default');
-    add_meta_box('money', 'Money Sign', 'MoneySign_callback', 'financial_calculator', 'normal', 'default');
+    add_meta_box('money', 'Money Sign', 'money_sign_callback', 'financial_calculator', 'normal', 'default');
 }
 
 add_action('add_meta_boxes', 'financial_calculator_add_meta_boxes');
 
-// Callback function for financial type meta box
 function financial_type_callback($post) {
     wp_nonce_field('financial_type_meta_box', 'financial_type_nonce');
     $financial_type = get_post_meta($post->ID, 'financial_type', true);
     ?>
     <label for="financial_type">Financial Type:</label>
     <select name="financial_type" id="financial_type">
-        <option value="hcstc_loan" <?php selected($financial_type, 'hcstc_loan'); ?>>Hcstc Loan</option>
-        <option value="secured_loan" <?php selected($financial_type, 'secured_loan'); ?>>Secured Loan</option>
-        <option value="car_financing" <?php selected($financial_type, 'car_financing'); ?>>Car Financing</option>
-        <option value="credit_card_repayments" <?php selected($financial_type, 'credit_card_repayments'); ?>>Credit Card Repayments</option><!-- comment -->
-        <option value="life_of_balance_card_repayments" <?php selected($financial_type, 'life_of_balance_card_repayments'); ?>>Life of Balance card repayments</option><!-- comment -->
-        <option value="balance_transfer" <?php selected($financial_type, 'balance_transfer'); ?>>Balance Transfer</option><!-- comment -->
-        <option value="business_loan" <?php selected($financial_type, 'business_loan'); ?>>Business Loan</option><!-- comment -->
-        <option value="mortgage_payments" <?php selected($financial_type, 'mortgage_payments'); ?>>Mortgage Payments</option><!-- comment -->
+        <?php
+        $financial_types = array(
+            'hcstc_loan' => 'Hcstc Loan',
+            'secured_loan' => 'Secured Loan',
+            'car_financing' => 'Car Financing',
+            'credit_card_repayments' => 'Credit Card Repayments',
+            'life_of_balance_card_repayments' => 'Life of Balance card repayments',
+            'balance_transfer' => 'Balance Transfer',
+            'business_loan' => 'Business Loan',
+            'mortgage_payments' => 'Mortgage Payments',
+        );
+
+        foreach ($financial_types as $key => $label) {
+            echo "<option value='$key'" . selected($financial_type, $key, false) . ">$label</option>";
+        }
+        ?>
     </select>
     <style>
-        select{
-        width:100%;
-}
+        select {
+            width: 100%;
+        }
     </style>
     <script>
         jQuery(document).ready(function ($) {
             $(document).on('change', '#financial_type', function (e) {
                 if ($(this).val().length > 2) {
-                    console.log($('#financial_type option:selected').text());
-                                      
                     $('#title').val($('#financial_type option:selected').text().split('_').join(' '));
                 }
                 e.preventDefault();
@@ -84,50 +86,60 @@ function financial_type_callback($post) {
     <?php
 }
 
-// Callback function for color meta box
 function color_callback($post) {
     wp_nonce_field('color_meta_box', 'color_nonce');
     $color = get_post_meta($post->ID, 'color', true);
     ?>
-    <label for="financial_type">Color:</label>
+    <label for="color">Color:</label>
     <select name="color" id="color">
-        <option value="4398B3" <?php selected($color, '4398B3'); ?>>Sky Blue</option>
-        <option value="C88548" <?php selected($color, 'C88548'); ?>>Orange</option>
-        <option value="74A050" <?php selected($color, '74A050'); ?>>Green</option>
+        <?php
+        $colors = array(
+            '4398B3' => 'Sky Blue',
+            'C88548' => 'Orange',
+            '74A050' => 'Green',
+        );
+
+        foreach ($colors as $key => $label) {
+            echo "<option value='$key'" . selected($color, $key, false) . ">$label</option>";
+        }
+        ?>
     </select>
     <?php
 }
 
-
-
-function MoneySign_callback($post) {
-    wp_nonce_field('color_meta_box', 'color_nonce');
-    $color = get_post_meta($post->ID, 'moneysign', true);
+function money_sign_callback($post) {
+    wp_nonce_field('moneysign_meta_box', 'moneysign_nonce');
+    $money_sign = get_post_meta($post->ID, 'moneysign', true);
     ?>
-    <label for="financial_type">Money Sign:</label>
+    <label for="moneysign">Money Sign:</label>
     <select name="moneysign" id="moneysign">
-        <option value="USD" <?php selected($color, 'USD'); ?>>USD $</option>
-        <option value="GBP" <?php selected($color, 'GBP'); ?>>GBP £</option>
-        <option value="EUR" <?php selected($color, 'EUR'); ?>>EUR €</option>
-        <option value="JPY" <?php selected($color, 'JPY'); ?>>JPY ¥</option>
-        <option value="KRW" <?php selected($color, 'KRW'); ?>>KRW ₩</option>
-        <option value="RUB" <?php selected($color, 'RUB'); ?>>RUB ₽</option>
+        <?php
+        $money_signs = array(
+            'USD' => 'USD $',
+            'GBP' => 'GBP £',
+            'EUR' => 'EUR €',
+            'JPY' => 'JPY ¥',
+            'KRW' => 'KRW ₩',
+            'RUB' => 'RUB ₽',
+        );
+
+        foreach ($money_signs as $key => $label) {
+            echo "<option value='$key'" . selected($money_sign, $key, false) . ">$label</option>";
+        }
+        ?>
     </select>
     <?php
 }
 
-
-
-
-// Save meta box data
 function financial_calculator_save_meta_boxes($post_id) {
-    if (!isset($_POST['financial_type_nonce']) || !isset($_POST['color_nonce'])) {
-        return;
-    }
+    $nonce_actions = array('financial_type_meta_box', 'color_meta_box', 'moneysign_meta_box');
 
-    if (!wp_verify_nonce($_POST['financial_type_nonce'], 'financial_type_meta_box') ||
-            !wp_verify_nonce($_POST['color_nonce'], 'color_meta_box')) {
-        return;
+    foreach ($nonce_actions as $action) {
+        $nonce_name = $action . '_nonce';
+
+        if (!isset($_POST[$nonce_name]) || !wp_verify_nonce($_POST[$nonce_name], $action)) {
+            return;
+        }
     }
 
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
@@ -138,27 +150,19 @@ function financial_calculator_save_meta_boxes($post_id) {
         return;
     }
 
-    if (isset($_POST['financial_type'])) {
-        update_post_meta($post_id, 'financial_type', sanitize_text_field($_POST['financial_type']));
-    }
+    $fields = array('financial_type', 'color', 'moneysign');
 
-    if (isset($_POST['color'])) {
-        update_post_meta($post_id, 'color', sanitize_text_field($_POST['color']));
+    foreach ($fields as $field) {
+        if (isset($_POST[$field])) {
+            update_post_meta($post_id, $field, sanitize_text_field($_POST[$field]));
+        }
     }
-    
-    if (isset($_POST['moneysign'])) {
-        update_post_meta($post_id, 'moneysign', sanitize_text_field($_POST['moneysign']));
-    }
-    
 }
 
 add_action('save_post', 'financial_calculator_save_meta_boxes');
 
-// Create shortcode to display financial calculators
 function financial_calculator_shortcode($atts) {
-    $atts = shortcode_atts(array(
-        'type' => '',
-            ), $atts);
+    $atts = shortcode_atts(array('type' => ''), $atts);
 
     $args = array(
         'post_type' => 'financial_calculator',
@@ -178,11 +182,13 @@ function financial_calculator_shortcode($atts) {
         ob_start();
         ?>
         <ul>
-            <?php while ($query->have_posts()) : $query->the_post(); ?>
+            <?php
+            while ($query->have_posts()) : $query->the_post();
+                ?>
                 <li>
                     <h3><?php the_title(); ?></h3>
-                    <p>Financial Type: <?php echo get_post_meta(get_the_ID(), 'financial_type', true); ?></p>
-                    <p>Color: <span style="background-color: <?php echo esc_attr(get_post_meta(get_the_ID(), 'color', true)); ?>; padding: 5px;"><?php echo esc_attr(get_post_meta(get_the_ID(), 'color', true)); ?></span></p>
+                    <p>Financial Type: <?php echo esc_html(get_post_meta(get_the_ID(), 'financial_type', true)); ?></p>
+                    <p>Color: <span style="background-color: <?php echo esc_attr(get_post_meta(get_the_ID(), 'color', true)); ?>; padding: 5px;"><?php echo esc_html(get_post_meta(get_the_ID(), 'color', true)); ?></span></p>
                 </li>
             <?php endwhile; ?>
         </ul>
@@ -196,11 +202,8 @@ function financial_calculator_shortcode($atts) {
 
 add_shortcode('financial_calculator', 'financial_calculator_shortcode');
 
-// Create shortcode for each post
 function financial_calculator_post_shortcode($atts) {
-    $atts = shortcode_atts(array(
-        'id' => '',
-            ), $atts);
+    $atts = shortcode_atts(array('id' => ''), $atts);
 
     $post_id = $atts['id'];
 
@@ -217,7 +220,6 @@ function financial_calculator_post_shortcode($atts) {
     ob_start();
     ?>
     <div>
-        <!-- Customize the output for your shortcode -->
         <h3><?php echo esc_html($post->post_title); ?></h3>
         <p>Financial Type: <?php echo esc_html(get_post_meta($post_id, 'financial_type', true)); ?></p>
         <p>Color: <span style="background-color: <?php echo esc_attr(get_post_meta($post_id, 'color', true)); ?>; padding: 5px;"><?php echo esc_html(get_post_meta($post_id, 'color', true)); ?></span></p>
@@ -228,7 +230,6 @@ function financial_calculator_post_shortcode($atts) {
 
 add_shortcode('financial_calculator_post', 'financial_calculator_post_shortcode');
 
-// Modify post permalink for financial calculator posts
 function modify_financial_calculator_permalink($permalink, $post) {
     if ($post->post_type === 'financial_calculator') {
         $shortcode = '[financial_calculator_post id="' . $post->ID . '"]';
@@ -248,14 +249,12 @@ function remove_permalink_button() {
 
 add_action('wp_before_admin_bar_render', 'remove_permalink_button');
 
-// Remove Permalink Meta Box and "Change Permalinks" Button
 function lc_remove_permalink_meta_box() {
     remove_meta_box('slugdiv', 'financial_calculator', 'normal');
 }
 
 add_action('admin_menu', 'lc_remove_permalink_meta_box');
 
-// Remove "Change Permalinks" Button
 function lc_remove_change_permalinks_button() {
     global $post_type;
     if ($post_type === 'financial_calculator') {
@@ -265,14 +264,12 @@ function lc_remove_change_permalinks_button() {
 
 add_action('admin_head', 'lc_remove_change_permalinks_button');
 
-// Add Shortcode Metabox
 function lc_add_shortcode_metabox() {
     add_meta_box('lc_shortcode_metabox', 'Shortcode', 'lc_render_shortcode_metabox', 'financial_calculator', 'side');
 }
 
 add_action('add_meta_boxes', 'lc_add_shortcode_metabox');
 
-// Render Shortcode Metabox
 function lc_render_shortcode_metabox($post) {
     $title = get_the_title($post->ID);
     $shortcode = '[financial_calculator id="' . $post->ID . '" title="' . $title . '"]';
@@ -288,10 +285,10 @@ function lc_render_shortcode_metabox($post) {
                 document.execCommand('copy');
             });
         });
-    </script><?php
+    </script>
+    <?php
 }
 
-// Modify WP List Table Columns
 function lc_modify_wp_list_table_columns($columns) {
     $columns['shortcode'] = 'Shortcode';
     return $columns;
@@ -299,15 +296,14 @@ function lc_modify_wp_list_table_columns($columns) {
 
 add_filter('manage_financial_calculator_posts_columns', 'lc_modify_wp_list_table_columns');
 
-// Populate WP List Table Column with Shortcode
 function lc_populate_wp_list_table_column($column, $post_id) {
     if ($column === 'shortcode') {
         $title = get_the_title($post_id);
-         $CALCOLOR = (get_post_meta($post_id, 'color', true));
-        echo '<div class="shortcodes" style="color:#fff;background:#'.$CALCOLOR.'">[financial_calculator id="' . $post_id . '" title="' . $title . '"]</div>';
+        $cal_color = get_post_meta($post_id, 'color', true);
+        echo '<div class="shortcodes" style="color: #fff; background: #' . esc_attr($cal_color) . ';">[financial_calculator id="' . $post_id . '" title="' . esc_html($title) . '"]</div>';
         ?>
         <style>
-            .shortcodes{
+            .shortcodes {
                 border: 1px solid;
                 text-align: center;
                 padding: 0.5rem 0;
@@ -317,10 +313,8 @@ function lc_populate_wp_list_table_column($column, $post_id) {
                 font-weight: 500;
             }
         </style>
-
         <?php
     }
 }
 
 add_action('manage_financial_calculator_posts_custom_column', 'lc_populate_wp_list_table_column', 2, 2);
-

@@ -1,0 +1,42 @@
+$b: #4398b3;
+$o: #c88548;
+$g: #74a050;
+$w: #fff;
+$gr: #808080;
+$bl: #000;
+@font-face {
+    font-family: "avenir";
+    src: url("../fonts/AvenirRegular.eot");
+    src:
+        url("../fonts/AvenirRegular.eot") format("embedded-opentype"),
+        url("../fonts/AvenirRegular.woff2") format("woff2"),
+        url("../fonts/AvenirRegular.woff") format("woff"),
+        url("../fonts/AvenirRegular.ttf") format("truetype"),
+        url("../fonts/AvenirRegular.svg#AvenirRegular") format("svg");
+}
+@font-face {
+    font-family: "montserrat";
+    src: url("../fonts/MontserratRegular.eot");
+    src:
+        url("../fonts/MontserratRegular.eot") format("embedded-opentype"),
+        url("../fonts/MontserratRegular.woff2") format("woff2"),
+        url("../fonts/MontserratRegular.woff") format("woff"),
+        url("../fonts/MontserratRegular.ttf") format("truetype"),
+        url("../fonts/MontserratRegular.svg#MontserratRegular") format("svg");
+}
+@import "desktop/Dcustom";
+@media screen and (max-width: 700px) {
+    html {
+        body {
+            
+            @import "mobile/Mcustom";
+        }
+    }
+    .error {
+        font-size: 0.7rem;
+        color: RED;
+        font-weight: 500;
+        line-height: 14px;
+        display: BLOCK;
+    }
+}
