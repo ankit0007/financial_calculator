@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: (this should be a list of wordpress.org userid's)
+Contributors: wnt1987
 Donate link: https://example.com/
 Tags: tag1, tag2
 Requires at least: 4.7
