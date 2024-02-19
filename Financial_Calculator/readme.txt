@@ -2,7 +2,7 @@
 Contributors: wordpressdotorg, phpdotnet, javascript
 Tags: Financial, Financial Calculator
 Requires at least: 4.9
-Tested up to: 6.1
+Tested up to: 1.0
 Stable tag: 1.6.3
 Requires PHP: 7.3
 License: GPLv2 or later
