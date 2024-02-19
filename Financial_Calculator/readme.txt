@@ -1,4 +1,4 @@
-=== Classic Editor ===
+=== Financial Calculators ===
 Contributors: wordpressdotorg, phpdotnet, javascript
 Tags: Financial, Financial Calculator
 Requires at least: 4.9
