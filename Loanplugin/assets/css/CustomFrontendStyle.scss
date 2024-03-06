@@ -25,17 +25,18 @@ $bl: #000;
         url("../fonts/MontserratRegular.svg#MontserratRegular") format("svg");
 }
 @import "desktop/Dcustom";
-@media screen and (max-width: 700px) {
-    html {
-        body {
-            @import "mobile/Mcustom";
-        }
-    }
-    .error {
+.error {
         font-size: 0.7rem;
         color: RED;
         font-weight: 500;
         line-height: 14px;
         display: BLOCK;
     }
+@media screen and (max-width: 700px) {
+    html {
+        body {
+            @import "mobile/Mcustom";
+        }
+    }
+    
 }

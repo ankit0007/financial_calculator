@@ -9,15 +9,15 @@ function callback_financial_calculator($atts, $content = null) {
     $CLASS = substr($CLASS, 1, 15);
     $HEADING_TOTAL = 'Total Amount Repaid';
     $HEADING_MONTHLY = 'Monthly Repayment';
-    $subheading = "hello";
-    $paragraph="";
     $HTML = "<div class=' mainbox " . $CLASS . " " . $CALCOLOR . " financial_type_" . $CALTYPE . "' data-function='" . $CALTYPE . "'>";
     $HTML .= "<div class='" . $CLASS . " title'>" . CalculatorTitle($CALTYPE) . " Calculator</div>";
     $HTML .= "<div class='row boxesinMobile'>";
     $HTML .= "<div class='whitebox col-8'>";
-    
+    $HTML .= "<div class='subheading'>Calculate how much a personal loan would cost and what the monthly repayments could be. </div>";
+    $HTML .= "<div class='calculatorInner row d-flex justify-content'>";
     switch ($CALTYPE) {
         case 'mortgage_payments':
+<<<<<<< HEAD:Loanplugin/shortcode/codes.php
             $paragraph="*Our mortgage loan calculator is for illustrative purposes to give you an approximate idea how much a loan could cost you. It is not intended to give any indication or guarantee of acceptance. Any application you may then choose to make will be subject to credit and other checks.";
             $HTML .= "<div class='subheading'>".esc_html("Calculate how much a mortgage loan would cost and what the monthly repayments could be.")."</div>";
             $HTML .= "<div class='calculatorInner row d-flex justify-content'>";
@@ -43,10 +43,16 @@ function callback_financial_calculator($atts, $content = null) {
                             <option value='29.5'>".esc_html("29.5")."</option>
                         </select>
                     </div>"
+=======
+            $HTML .= "<div class='col PropertyValue'><label>Property Value (" . Currency($CURRENCY) . ")</label><input class='validation' data-max='4000000' type='text'></div>"
+                    . "<div class='col LoanTerm'><label>Loan Term (months)</label><input class='validation' data-max='360' type='text'></div>"
+                    . "<div class='col APR'><label>APR (%)</label><input class='validation' data-max='20' type='text'></div>"
+>>>>>>> 50d1a32816ade21891824ec8777ee4470e5d59a7:Financial_Calculator/shortcode/codes.php
                     . "<div class='col deposit'><label>deposit (" . Currency($CURRENCY) . ")</label><input class='diposit' data-max='4000000' type='text'></div>"
                     . "<div class='col btns'><label>".esc_html("deposit")."</label><input type='button' value='Calculate'></div>";
             break;
         case 'business_loan':
+<<<<<<< HEAD:Loanplugin/shortcode/codes.php
             $paragraph="*Our personal business loan calculator is for illustrative purposes to give you an approximate idea how much a loan could cost you. It is not intended to give any indication or guarantee of acceptance. Any application you may then choose to make will be subject to credit and other checks.";
             $HTML .= "<div class='subheading'>".esc_html("Calculate how much a business loan would cost and what the monthly repayments could be.")."</div>";
             $HTML .= "<div class='calculatorInner row d-flex justify-content'>";
@@ -86,12 +92,25 @@ function callback_financial_calculator($atts, $content = null) {
                     </select>
                 </div>"
                     . "<div class='col aproffset'><label>".esc_html("apr offset")."</label><input type='text'></div>"
+=======
+            $HTML .= "<div class='col Amount'><label>Amount (" . Currency($CURRENCY) . ")</label><input class='validation' data-max='5000000' type='text'></div>"
+                    . "<div class='col LoanTerm'><label>Loan Term (months)</label><input class='validation' data-max='96' type='text'></div>"
+                    . "<div class='col APR'><label>APR (%)</label><input  class='validation' data-max='30'  type='text'></div>"
+                    . "<div class='col btns'><label>deposit</label><input type='button' value='Calculate'></div>"
+                    . "<div class='col btns'><label>deposit</label></div>";
+            break;
+        case 'balance_transfer':
+            $HTML .= "<div class='col Amount'><label>Amount (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
+                    . "<div class='col APR'><label>APR (%)</label><input class='validation' data-max='20' type='text'></div>"
+                    . "<div class='col aproffset'><label>apr offset</label><input type='text'></div>"
+>>>>>>> 50d1a32816ade21891824ec8777ee4470e5d59a7:Financial_Calculator/shortcode/codes.php
                     . "<div class='col paymentamount'><label>payment amount (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
                     . "<div class='col'></div></div>"
                     . "<div class='row calculatorInner row d-flex justify-content'><div class='col Fee'><label>Fee (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
                     . "<div class='col btns'><label>".esc_html("deposit")."</label><input type='button' value='Calculate'></div><div class='col'></div><div class='col'></div><div class='col'></div>";
             break;
         case 'life_of_balance_card_repayments':
+<<<<<<< HEAD:Loanplugin/shortcode/codes.php
             $paragraph="*Calculated on approximate minimum payment rates which vary by provider and product. We assume no additional spend on the card, no fees are incurred and the same static interest rate is paid on all balances.";
             $HTML .= "<div class='subheading'>".esc_html("Calculate how much a card will cost you or how quickly you can pay off your existing cards. Simply add a card below to get started.")."</div>";
             $HTML .= "<div class='calculatorInner row d-flex justify-content'>";
@@ -102,10 +121,16 @@ function callback_financial_calculator($atts, $content = null) {
                     </select>
                 </div>"
                     . "<div class='col paymenttype'><label>".esc_html("payment type")."</label><input type='text'></div>"
+=======
+            $HTML .= "<div class='col amount'><label>amount (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
+                    . "<div class='col APR'><label>APR (%)</label><input class='validation' data-max='20' type='text'></div>"
+                    . "<div class='col paymenttype'><label>payment type</label><input type='text'></div>"
+>>>>>>> 50d1a32816ade21891824ec8777ee4470e5d59a7:Financial_Calculator/shortcode/codes.php
                     . "<div class='col paymentamount'><label>payment amount (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
                     . "<div class='col btns'><label>".esc_html("deposit")."</label><input type='button' value='Calculate'></div>";
             break;
         case 'car_financing':
+<<<<<<< HEAD:Loanplugin/shortcode/codes.php
             $paragraph="*This calculator is for illustration purposes only. Your actual repayments could be lower or higher depending on your personal circumstances. The make, model and age of the car you’d like to purchase will also impact the final figure quoted.";
             $HTML .= "<div class='subheading'>".esc_html("Calculate how much a car loan would cost and what the monthly repayments could be.")."</div>";
             $HTML .= "<div class='calculatorInner row d-flex justify-content'>";
@@ -131,10 +156,16 @@ function callback_financial_calculator($atts, $content = null) {
                         <option value='29.5'>".esc_html("29.5")."</option>
                     </select>
                 </div>"
+=======
+            $HTML .= "<div class='col amount'><label>amount (" . Currency($CURRENCY) . ")</label><input class='validation' data-max='10000000'  type='text'></div>"
+                    . "<div class='col LoanTerm'><label>Loan Term (months)</label><input class='validation' data-max='360' type='text'></div>"
+                    . "<div class='col APR'><label>APR (%)</label><input class='validation' data-max='30' type='text'></div>"
+>>>>>>> 50d1a32816ade21891824ec8777ee4470e5d59a7:Financial_Calculator/shortcode/codes.php
                     . "<div class='col deposit'><label>deposit (" . Currency($CURRENCY) . ")</label><input class='validation' data-max='10000000'  type='text'></div>"
                     . "<div class='col btns'><label>".esc_html("deposit")."</label><input type='button' value='Calculate'></div>";
             break;
         case 'credit_card_repayments':
+<<<<<<< HEAD:Loanplugin/shortcode/codes.php
             $paragraph="*Calculated on approximate minimum payment rates which vary by provider and product. We assume no additional spend on the card, no fees are incurred and the same static interest rate is paid on all balances.";
             $HTML .= "<div class='subheading'>".esc_html("Calculate how much a credit card will cost you or how quickly you can pay off your existing cards. Simply add a card below to get started.")."</div>";
             $HTML .= "<div class='calculatorInner row d-flex justify-content'>";
@@ -145,12 +176,18 @@ function callback_financial_calculator($atts, $content = null) {
                     </select>
                 </div>"
                     . "<div class='col paymenttype'><label>".esc_html("payment type")."</label><input type='text'></div>"
+=======
+            $HTML .= "<div class='col amount'><label>amount (" . Currency($CURRENCY) . ")</label><input class='validation' data-max='100000' type='text'></div>"
+                    . "<div class='col APR'><label>APR (%)</label><input class='validation' data-max='39' type='text'></div>"
+                    . "<div class='col paymenttype'><label>payment type</label><input type='text'></div>"
+>>>>>>> 50d1a32816ade21891824ec8777ee4470e5d59a7:Financial_Calculator/shortcode/codes.php
                     . "<div class='col paymentamount'><label>payment amount (" . Currency($CURRENCY) . ")</label><input class='validation' data-max='50000' type='text'></div>"
                     . "<div class='col btns'><label>".esc_html("deposit")."</label><input type='button' value='Calculate'></div>";
             $HEADING_TOTAL = 'Total Amount Paid';
             $HEADING_MONTHLY = 'Loan Term (Months)';
             break;
         case 'hcstc_loan':
+<<<<<<< HEAD:Loanplugin/shortcode/codes.php
             $paragraph="* This calculation is an estimated savings based on the assumptions that you have provided. Your actual savings may vary depending on the balance transfer offer you receive and the payment schedule you maintain while in your introductory period.";
             $HTML .= "<div class='subheading'>".esc_html("Calculate how much a HCSTC loan would cost and what the monthly repayments could be.")."</div>";
             $HTML .= "<div class='calculatorInner row d-flex justify-content'>";
@@ -204,6 +241,17 @@ function callback_financial_calculator($atts, $content = null) {
                         <option value='29.5'>".esc_html("29.5")."</option>
                     </select>
                 </div>"
+=======
+            $HTML .= "<div class='col amount'><label>amount (" . Currency($CURRENCY) . ")</label><input class='validation' data-max='4000000' type='text'></div>"
+                    . "<div class='col LoanTerm'><label>Loan Term (months)</label><input class='validation' data-max='60' type='text'></div>"
+                    . "<div class='col APR'><label>APR (%)</label><input class='validation' data-max='21' type='text'></div>"
+                    . "<div class='col btns'><label>deposit</label><input class='validation' min='0' data-max='4000000' type='button' value='Calculate'></div>";
+            break;
+        case 'secured_loan':
+            $HTML .= "<div class='col amount'><label>amount (" . Currency($CURRENCY) . ")</label><input class='validation' data-max='105000000' type='text'></div>"
+                    . "<div class='col LoanTerm'><label>Loan Term (months)</label><input class='validation' data-max='180' type='text'></div>"
+                    . "<div class='col APR'><label>APR (%)</label><input class='validation' data-max='14' type='text'></div>"
+>>>>>>> 50d1a32816ade21891824ec8777ee4470e5d59a7:Financial_Calculator/shortcode/codes.php
                     . "<div class='col propertyvalue'><label>property value (" . Currency($CURRENCY) . ")</label><input class='validation' data-max='100000000' type='text'></div>"
                     . "<div class='col'></div></div>"
                     . "<div class='row calculatorInner row d-flex justify-content'><div class='col mortgagebalance'><label>mortgage balance (" . Currency($CURRENCY) . ")</label><input type='text'></div>"
@@ -217,7 +265,7 @@ function callback_financial_calculator($atts, $content = null) {
     $HTML .= "<div class='col20per col-4'>";
     $HTML .= '<div class="row total"><div class="col-8">' . $HEADING_TOTAL . '</div><div class="col-4 totalpay">' . Currency($CURRENCY) . '<span>0.0</span></div></div>';
     $HTML .= '<div class="row subtotal"><div class="col-8">' . $HEADING_MONTHLY . '</div><div class="col-4 permonthpay">' . Currency($CURRENCY) . '<span>0.0</span></div></div>';
-    $HTML .= "<div class='note'>".$paragraph."</div>";
+    $HTML .= "<div class='note'>*Our personal loan calculator is for illustrative purposes to give you an approximate idea how much a loan could cost you. It is not intended to give any indication or guarantee of acceptance. Any application you may then choose to make will be subject to credit and other checks.</div>";
     $HTML .= "</div></div></div>";
 
     return $HTML;
