@@ -9,7 +9,7 @@ function callback_financial_calculator($atts, $content = null) {
     $CLASS = substr($CLASS, 1, 15);
     $HEADING_TOTAL = 'Total Amount Repaid';
     $HEADING_MONTHLY = 'Monthly Repayment';
-    $HTML = "<div class=' mainbox " . esc_html($CLASS) . " " . esc_html($CALCOLOR) . " financial_type_" . esc_html($CALTYPE) . "' data-function='" . esc_html($CALTYPE) . "'>";
+    $HTML = "<div class=' mainbox " . esc_attr($CLASS) . " " . esc_attr($CALCOLOR) . " financial_type_" . esc_attr($CALTYPE) . "' data-function='" . esc_attr($CALTYPE) . "'>";
     $HTML .= "<div class='" . $CLASS . " title'>" . CalculatorTitle($CALTYPE) . " Calculator</div>";
     $HTML .= "<div class='row boxesinMobile'>";
     $HTML .= "<div class='whitebox col-8'>";
@@ -80,7 +80,7 @@ function callback_financial_calculator($atts, $content = null) {
     }
     $HTML .= "</div>";
     $IMGS = esc_url($PPATH . 'assets/images/companyname.svg');
-    $HTML .= "<div class='copyrights'>".esc_html("Calculator powered by ")."<a target='_new' href='https://www.thimbl.com'><img src='" . esc_attr($IMGS) . "'></a></div>";
+    $HTML .= "<div class='copyrights'>".esc_html("Calculator powered by ")."<a target='_new' href='https://www.thimbl.com'><img src='" . esc_url($IMGS) . "'></a></div>";
     $HTML .= "</div>";
     $HTML .= "<div class='col20per col-4'>";
     $HTML .= '<div class="row total"><div class="col-8">' . $HEADING_TOTAL . '</div><div class="col-4 totalpay">' . Currency($CURRENCY) . '<span>0.0</span></div></div>';
