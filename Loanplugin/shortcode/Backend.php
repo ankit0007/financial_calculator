@@ -40,13 +40,13 @@ add_action('init', 'fincal_create_financial_calculator_post_type');
 function fincal_financial_calculator_add_meta_boxes() {
     add_meta_box('financial_type', 'Financial Type', 'fincal_financial_type_callback', 'financial_calculator', 'normal', 'default');
     add_meta_box('color', 'Color', 'fincal_color_callback', 'financial_calculator', 'normal', 'default');
-    add_meta_box('money', 'Money Sign', 'money_sign_callback', 'financial_calculator', 'normal', 'default');
+    add_meta_box('money', 'Money Sign', 'fincal_MoneySign_callback', 'financial_calculator', 'normal', 'default');
 }
 
 add_action('add_meta_boxes', 'fincal_financial_calculator_add_meta_boxes');
 
 function fincal_financial_type_callback($post) {
-    wp_nonce_field('financial_type_meta_box', 'financial_type_nonce');
+    wp_nonce_field(basename(__FILE__), 'financial_type_nonce');
     $financial_type = get_post_meta($post->ID, 'financial_type', true);
     ?>
     <label for="financial_type">Financial Type:</label>
@@ -135,21 +135,22 @@ function fincal_MoneySign_callback($post) {
 
 // Save meta box data
 function fincal_financial_calculator_save_meta_boxes($post_id) {
-    $nonce_actions = array('financial_type_meta_box', 'color_meta_box', 'moneysign_meta_box');
-
-    if (!wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['financial_type_nonce'])), 'financial_type_meta_box') ||
-            !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['color_nonce'])), 'color_meta_box')) {
-        return;
+    // Verify nonce
+    if (!isset($_POST['financial_type_nonce']) || !wp_verify_nonce($_POST['financial_type_nonce'], basename(__FILE__))) {
+        return $post_id;
     }
 
+    // Check autosave
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-        return;
+        return $post_id;
     }
 
+    // Check permissions
     if (!current_user_can('edit_post', $post_id)) {
-        return;
+        return $post_id;
     }
 
+    // Update meta data
     $fields = array('financial_type', 'color', 'moneysign');
 
     foreach ($fields as $field) {
