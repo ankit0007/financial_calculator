@@ -1,5 +1,5 @@
 <?php
-function create_financial_calculator_post_type() {
+function fincal_create_financial_calculator_post_type() {
     $labels = array(
         'name' => 'Financial Calculators',
         'singular_name' => 'Financial Calculator',
@@ -35,17 +35,17 @@ function create_financial_calculator_post_type() {
     register_post_type('financial_calculator', $args);
 }
 
-add_action('init', 'create_financial_calculator_post_type');
+add_action('init', 'fincal_create_financial_calculator_post_type');
 
-function financial_calculator_add_meta_boxes() {
-    add_meta_box('financial_type', 'Financial Type', 'financial_type_callback', 'financial_calculator', 'normal', 'default');
-    add_meta_box('color', 'Color', 'color_callback', 'financial_calculator', 'normal', 'default');
+function fincal_financial_calculator_add_meta_boxes() {
+    add_meta_box('financial_type', 'Financial Type', 'fincal_financial_type_callback', 'financial_calculator', 'normal', 'default');
+    add_meta_box('color', 'Color', 'fincal_color_callback', 'financial_calculator', 'normal', 'default');
     add_meta_box('money', 'Money Sign', 'money_sign_callback', 'financial_calculator', 'normal', 'default');
 }
 
-add_action('add_meta_boxes', 'financial_calculator_add_meta_boxes');
+add_action('add_meta_boxes', 'fincal_financial_calculator_add_meta_boxes');
 
-function financial_type_callback($post) {
+function fincal_financial_type_callback($post) {
     wp_nonce_field('financial_type_meta_box', 'financial_type_nonce');
     $financial_type = get_post_meta($post->ID, 'financial_type', true);
     ?>
@@ -88,7 +88,7 @@ function financial_type_callback($post) {
     <?php
 }
 
-function color_callback($post) {
+function fincal_color_callback($post) {
     wp_nonce_field('color_meta_box', 'color_nonce');
     $color = get_post_meta($post->ID, 'color', true);
     ?>
@@ -109,7 +109,7 @@ function color_callback($post) {
     <?php
 }
 
-function MoneySign_callback($post) {
+function fincal_MoneySign_callback($post) {
     wp_nonce_field('color_meta_box', 'color_nonce');
     $color = get_post_meta($post->ID, 'moneysign', true);
     ?>
@@ -134,7 +134,7 @@ function MoneySign_callback($post) {
 }
 
 // Save meta box data
-function financial_calculator_save_meta_boxes($post_id) {
+function fincal_financial_calculator_save_meta_boxes($post_id) {
     $nonce_actions = array('financial_type_meta_box', 'color_meta_box', 'moneysign_meta_box');
 
     if (!wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['financial_type_nonce'])), 'financial_type_meta_box') ||
@@ -163,9 +163,9 @@ function financial_calculator_save_meta_boxes($post_id) {
     }
 }
 
-add_action('save_post', 'financial_calculator_save_meta_boxes');
+add_action('save_post', 'fincal_financial_calculator_save_meta_boxes');
 
-function financial_calculator_shortcode($atts) {
+function fincal_financial_calculator_shortcode($atts) {
     $atts = shortcode_atts(array('type' => ''), $atts);
 
     $args = array(
@@ -202,9 +202,9 @@ function financial_calculator_shortcode($atts) {
     return 'No financial calculators found.';
 }
 
-add_shortcode('financial_calculator', 'financial_calculator_shortcode');
+add_shortcode('financial_calculator', 'fincal_financial_calculator_shortcode');
 
-function financial_calculator_post_shortcode($atts) {
+function fincal_financial_calculator_post_shortcode($atts) {
     $atts = shortcode_atts(array('id' => ''), $atts);
 
     $post_id = $atts['id'];
@@ -230,9 +230,9 @@ function financial_calculator_post_shortcode($atts) {
     return ob_get_clean();
 }
 
-add_shortcode('financial_calculator_post', 'financial_calculator_post_shortcode');
+add_shortcode('financial_calculator_post', 'fincal_financial_calculator_post_shortcode');
 
-function modify_financial_calculator_permalink($permalink, $post) {
+function fincal_modify_financial_calculator_permalink($permalink, $post) {
     if ($post->post_type === 'financial_calculator') {
         $shortcode = '[financial_calculator_post id="' . esc_html($post->ID) . '"]';
         return $shortcode;
@@ -241,38 +241,38 @@ function modify_financial_calculator_permalink($permalink, $post) {
     return $permalink;
 }
 
-add_filter('post_type_link', 'modify_financial_calculator_permalink', 10, 2);
+add_filter('post_type_link', 'fincal_modify_financial_calculator_permalink', 10, 2);
 
-function remove_permalink_button() {
+function fincal_remove_permalink_button() {
     global $wp_admin_bar;
 
     $wp_admin_bar->remove_menu('edit-permalink');
 }
 
-add_action('wp_before_admin_bar_render', 'remove_permalink_button');
+add_action('wp_before_admin_bar_render', 'fincal_remove_permalink_button');
 
-function lc_remove_permalink_meta_box() {
+function fincal_lc_remove_permalink_meta_box() {
     remove_meta_box('slugdiv', 'financial_calculator', 'normal');
 }
 
-add_action('admin_menu', 'lc_remove_permalink_meta_box');
+add_action('admin_menu', 'fincal_lc_remove_permalink_meta_box');
 
-function lc_remove_change_permalinks_button() {
+function fincal_lc_remove_change_permalinks_button() {
     global $post_type;
     if ($post_type === 'financial_calculator') {
         echo '<style>#edit-slug-box { display: none; }</style>';
     }
 }
 
-add_action('admin_head', 'lc_remove_change_permalinks_button');
+add_action('admin_head', 'fincal_lc_remove_change_permalinks_button');
 
-function lc_add_shortcode_metabox() {
-    add_meta_box('lc_shortcode_metabox', 'Shortcode', 'lc_render_shortcode_metabox', 'financial_calculator', 'side');
+function fincal_lc_add_shortcode_metabox() {
+    add_meta_box('lc_shortcode_metabox', 'Shortcode', 'fincal_lc_render_shortcode_metabox', 'financial_calculator', 'side');
 }
 
-add_action('add_meta_boxes', 'lc_add_shortcode_metabox');
+add_action('add_meta_boxes', 'fincal_lc_add_shortcode_metabox');
 
-function lc_render_shortcode_metabox($post) {
+function fincal_lc_render_shortcode_metabox($post) {
     $title = get_the_title($post->ID);
     $shortcode = '[financial_calculator id="' . esc_html($post->ID) . '" title="' . esc_html($title) . '"]';
     ?>
@@ -291,14 +291,14 @@ function lc_render_shortcode_metabox($post) {
     <?php
 }
 
-function lc_modify_wp_list_table_columns($columns) {
+function fincal_lc_modify_wp_list_table_columns($columns) {
     $columns['shortcode'] = 'Shortcode';
     return $columns;
 }
 
-add_filter('manage_financial_calculator_posts_columns', 'lc_modify_wp_list_table_columns');
+add_filter('manage_financial_calculator_posts_columns', 'fincal_lc_modify_wp_list_table_columns');
 
-function lc_populate_wp_list_table_column($column, $post_id) {
+function fincal_lc_populate_wp_list_table_column($column, $post_id) {
     if ($column === 'shortcode') {
         $title = get_the_title($post_id);
         $CALCOLOR = (get_post_meta($post_id, 'color', true));
@@ -319,4 +319,4 @@ function lc_populate_wp_list_table_column($column, $post_id) {
     }
 }
 
-add_action('manage_financial_calculator_posts_custom_column', 'lc_populate_wp_list_table_column', 2, 2);
+add_action('manage_financial_calculator_posts_custom_column', 'fincal_lc_populate_wp_list_table_column', 2, 2);

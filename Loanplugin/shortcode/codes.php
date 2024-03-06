@@ -1,6 +1,6 @@
 <?php
 
-function callback_financial_calculator($atts, $content = null) {
+function fincal_callback_financial_calculator($atts, $content = null) {
     global $PPATH;
     $CALTYPE = sanitize_text_field(get_post_meta($atts['id'], 'financial_type', true));
     $CALCOLOR = sanitize_text_field(get_post_meta($atts['id'], 'color', true));
@@ -10,7 +10,7 @@ function callback_financial_calculator($atts, $content = null) {
     $HEADING_TOTAL = 'Total Amount Repaid';
     $HEADING_MONTHLY = 'Monthly Repayment';
     $HTML = "<div class=' mainbox " . esc_attr($CLASS) . " " . esc_attr($CALCOLOR) . " financial_type_" . esc_attr($CALTYPE) . "' data-function='" . esc_attr($CALTYPE) . "'>";
-    $HTML .= "<div class='" . $CLASS . " title'>" . CalculatorTitle($CALTYPE) . " Calculator</div>";
+    $HTML .= "<div class='" . $CLASS . " title'>" . fincal_CalculatorTitle($CALTYPE) . " Calculator</div>";
     $HTML .= "<div class='row boxesinMobile'>";
     $HTML .= "<div class='whitebox col-8'>";
     $HTML .= "<div class='subheading'>Calculate how much a personal loan would cost and what the monthly repayments could be. </div>";
@@ -91,18 +91,18 @@ function callback_financial_calculator($atts, $content = null) {
     return $HTML;
 }
 
-add_shortcode('financial_calculator', 'callback_financial_calculator');
+add_shortcode('financial_calculator', 'fincal_callback_financial_calculator');
 
-function add_theme_scripts() {
+function fincal_add_theme_scripts() {
     global $PPATH;
     wp_enqueue_style('ShortcodeStyle', $PPATH . 'assets/css/CustomFrontendStyle.css', array(), rand(), 'all');
     wp_enqueue_style('Grids', $PPATH . 'assets/css/bootstrap/bootstrap-grid.min.css', array(), rand(), 'all');
     wp_enqueue_script('ShortcodeScript', $PPATH . 'assets/js/CustomFrontendScript.js', array('jquery'), rand(), true);
 }
 
-add_action('wp_enqueue_scripts', 'add_theme_scripts');
+add_action('wp_enqueue_scripts', 'fincal_add_theme_scripts');
 
-function CalculatorTitle($p) {
+function fincal_CalculatorTitle($p) {
     $a['mortgage_payments'] = 'Mortgage Payments';
     $a['business_loan'] = 'Business Loan';
     $a['balance_transfer'] = 'Balance Transfer';
