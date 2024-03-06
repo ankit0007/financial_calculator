@@ -1,8 +1,4 @@
 <?php
-<<<<<<< HEAD:Loanplugin/shortcode/Backend.php
-=======
-
->>>>>>> 50d1a32816ade21891824ec8777ee4470e5d59a7:Financial_Calculator/shortcode/Backend.php
 function create_financial_calculator_post_type() {
     $labels = array(
         'name' => 'Financial Calculators',
@@ -73,24 +69,16 @@ function financial_type_callback($post) {
         ?>
     </select>
     <style>
-<<<<<<< HEAD:Loanplugin/shortcode/Backend.php
-        select {
-            width: 100%;
-=======
         select{
             width:100%;
->>>>>>> 50d1a32816ade21891824ec8777ee4470e5d59a7:Financial_Calculator/shortcode/Backend.php
         }
     </style>
     <script>
         jQuery(document).ready(function ($) {
             $(document).on('change', '#financial_type', function (e) {
                 if ($(this).val().length > 2) {
-<<<<<<< HEAD:Loanplugin/shortcode/Backend.php
-=======
                     console.log($('#financial_type option:selected').text());
 
->>>>>>> 50d1a32816ade21891824ec8777ee4470e5d59a7:Financial_Calculator/shortcode/Backend.php
                     $('#title').val($('#financial_type option:selected').text().split('_').join(' '));
                 }
                 e.preventDefault();
@@ -121,15 +109,9 @@ function color_callback($post) {
     <?php
 }
 
-<<<<<<< HEAD:Loanplugin/shortcode/Backend.php
-function money_sign_callback($post) {
-    wp_nonce_field('moneysign_meta_box', 'moneysign_nonce');
-    $money_sign = get_post_meta($post->ID, 'moneysign', true);
-=======
 function MoneySign_callback($post) {
     wp_nonce_field('color_meta_box', 'color_nonce');
     $color = get_post_meta($post->ID, 'moneysign', true);
->>>>>>> 50d1a32816ade21891824ec8777ee4470e5d59a7:Financial_Calculator/shortcode/Backend.php
     ?>
     <label for="moneysign">Money Sign:</label>
     <select name="moneysign" id="moneysign">
@@ -151,25 +133,13 @@ function MoneySign_callback($post) {
     <?php
 }
 
-<<<<<<< HEAD:Loanplugin/shortcode/Backend.php
-=======
 // Save meta box data
->>>>>>> 50d1a32816ade21891824ec8777ee4470e5d59a7:Financial_Calculator/shortcode/Backend.php
 function financial_calculator_save_meta_boxes($post_id) {
     $nonce_actions = array('financial_type_meta_box', 'color_meta_box', 'moneysign_meta_box');
 
-<<<<<<< HEAD:Loanplugin/shortcode/Backend.php
-    foreach ($nonce_actions as $action) {
-        $nonce_name = $action . '_nonce';
-
-        if (!isset($_POST[$nonce_name]) || !wp_verify_nonce($_POST[$nonce_name], $action)) {
-            return;
-        }
-=======
     if (!wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['financial_type_nonce'])), 'financial_type_meta_box') ||
             !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['color_nonce'])), 'color_meta_box')) {
         return;
->>>>>>> 50d1a32816ade21891824ec8777ee4470e5d59a7:Financial_Calculator/shortcode/Backend.php
     }
 
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
@@ -187,13 +157,10 @@ function financial_calculator_save_meta_boxes($post_id) {
             update_post_meta($post_id, $field, sanitize_text_field($_POST[$field]));
         }
     }
-<<<<<<< HEAD:Loanplugin/shortcode/Backend.php
-=======
 
     if (isset($_POST['moneysign'])) {
         update_post_meta($post_id, 'moneysign', sanitize_text_field($_POST['moneysign']));
     }
->>>>>>> 50d1a32816ade21891824ec8777ee4470e5d59a7:Financial_Calculator/shortcode/Backend.php
 }
 
 add_action('save_post', 'financial_calculator_save_meta_boxes');
@@ -219,13 +186,7 @@ function financial_calculator_shortcode($atts) {
         ob_start();
         ?>
         <ul>
-<<<<<<< HEAD:Loanplugin/shortcode/Backend.php
-            <?php
-            while ($query->have_posts()) : $query->the_post();
-                ?>
-=======
         <?php while ($query->have_posts()) : $query->the_post(); ?>
->>>>>>> 50d1a32816ade21891824ec8777ee4470e5d59a7:Financial_Calculator/shortcode/Backend.php
                 <li>
                     <h3><?php the_title(); ?></h3>
                     <p>Financial Type: <?php echo esc_html(get_post_meta(get_the_ID(), 'financial_type', true)); ?></p>
@@ -273,7 +234,7 @@ add_shortcode('financial_calculator_post', 'financial_calculator_post_shortcode'
 
 function modify_financial_calculator_permalink($permalink, $post) {
     if ($post->post_type === 'financial_calculator') {
-        $shortcode = '[financial_calculator_post id="' . $post->ID . '"]';
+        $shortcode = '[financial_calculator_post id="' . esc_html($post->ID) . '"]';
         return $shortcode;
     }
 
@@ -313,7 +274,7 @@ add_action('add_meta_boxes', 'lc_add_shortcode_metabox');
 
 function lc_render_shortcode_metabox($post) {
     $title = get_the_title($post->ID);
-    $shortcode = '[financial_calculator id="' . $post->ID . '" title="' . $title . '"]';
+    $shortcode = '[financial_calculator id="' . esc_html($post->ID) . '" title="' . esc_html($title) . '"]';
     ?>
     <label for="lc_shortcode">Shortcode:</label>
     <input type="text" name="lc_shortcode" id="lc_shortcode" value="<?php echo esc_attr($shortcode); ?>" readonly style="width: 100%; margin-bottom: 10px;">
@@ -340,13 +301,8 @@ add_filter('manage_financial_calculator_posts_columns', 'lc_modify_wp_list_table
 function lc_populate_wp_list_table_column($column, $post_id) {
     if ($column === 'shortcode') {
         $title = get_the_title($post_id);
-<<<<<<< HEAD:Loanplugin/shortcode/Backend.php
-        $cal_color = get_post_meta($post_id, 'color', true);
-        echo '<div class="shortcodes" style="color: #fff; background: #' . esc_attr($cal_color) . ';">[financial_calculator id="' . $post_id . '" title="' . esc_html($title) . '"]</div>';
-=======
         $CALCOLOR = (get_post_meta($post_id, 'color', true));
-        echo '<div class="shortcodes" style="color:#fff;background:#' . $CALCOLOR . '">[financial_calculator id="' . $post_id . '" title="' . $title . '"]</div>';
->>>>>>> 50d1a32816ade21891824ec8777ee4470e5d59a7:Financial_Calculator/shortcode/Backend.php
+        echo '<div class="shortcodes" style="color:#fff;background:#' . esc_html($CALCOLOR) . '">[financial_calculator id="' . esc_html($post_id) . '" title="' . esc_html($title) . '"]</div>';
         ?>
         <style>
             .shortcodes {
