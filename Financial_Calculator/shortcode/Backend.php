@@ -64,8 +64,9 @@ function fincal_financial_type_callback($post) {
         );
 
         foreach ($financial_types as $key => $label) {
+            if(isset($key)){
             echo "<option value='$key'" . selected($financial_type, $key, false) . ">$label</option>";
-        }
+        }}
         ?>
     </select>
     <style>

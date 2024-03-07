@@ -1,9 +1,9 @@
 === Financial Calculators ===
 Contributors: wordpressdotorg, phpdotnet, javascript
 Tags: Financial, Financial Calculator
-Requires at least: 4.9
+Requires at least: 6.1
 Tested up to: 1.0
-Stable tag: 1.6.3
+Stable tag: 1.0
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
