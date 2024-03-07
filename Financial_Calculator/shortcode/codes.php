@@ -95,9 +95,9 @@ add_shortcode('financial_calculator', 'fincal_callback_financial_calculator');
 
 function fincal_add_theme_scripts() {
     global $PPATH;
-    wp_enqueue_style('ShortcodeStyle', $PPATH . 'assets/css/CustomFrontendStyle.css', array(), rand(), 'all');
-    wp_enqueue_style('Grids', $PPATH . 'assets/css/bootstrap/bootstrap-grid.min.css', array(), rand(), 'all');
-    wp_enqueue_script('ShortcodeScript', $PPATH . 'assets/js/CustomFrontendScript.js', array('jquery'), rand(), true);
+    wp_enqueue_style('ShortcodeStyle', $PPATH . 'assets/css/CustomFrontendStyle.css', array(), 1, 'all');
+    wp_enqueue_style('Grids', $PPATH . 'assets/css/bootstrap/bootstrap-grid.min.css', array(), 1, 'all');
+    wp_enqueue_script('ShortcodeScript', $PPATH . 'assets/js/CustomFrontendScript.js', array('jquery'), 1, true);
 }
 
 add_action('wp_enqueue_scripts', 'fincal_add_theme_scripts');
