@@ -65,7 +65,7 @@ function fincal_financial_type_callback($post) {
 
         foreach ($financial_types as $key => $label) {
             if(isset($key)){
-            echo "<option value='$key'" . selected($financial_type, $key, false) . ">$label</option>";
+            echo "<option value='".sanitize_key($key)."'" . selected($financial_type, $key, false) . ">$label</option>";
         }}
         ?>
     </select>
@@ -103,7 +103,7 @@ function fincal_color_callback($post) {
         );
 
         foreach ($colors as $key => $label) {
-            echo "<option value='$key'" . selected($color, $key, false) . ">$label</option>";
+            echo "<option value='".sanitize_key($key)."'" . selected($color, $key, false) . ">$label</option>";
         }
         ?>
     </select>
@@ -127,7 +127,7 @@ function fincal_MoneySign_callback($post) {
         );
 
         foreach ($money_signs as $key => $label) {
-            echo "<option value='$key'" . selected($money_sign, $key, false) . ">$label</option>";
+            echo "<option value='".sanitize_key($key)."'" . selected($money_sign, $key, false) . ">$label</option>";
         }
         ?>
     </select>
@@ -304,7 +304,7 @@ function fincal_lc_populate_wp_list_table_column($column, $post_id) {
     if ($column === 'shortcode') {
         $title = get_the_title($post_id);
         $CALCOLOR = (get_post_meta($post_id, 'color', true));
-        echo '<div class="shortcodes" style="color:#fff;background:#' . esc_html($CALCOLOR) . '">[financial_calculator id="' . esc_html($post_id) . '" title="' . esc_html($title) . '"]</div>';
+        echo '<div class="shortcodes" style="color:#fff;background:#' . sanitize_hax_color_no_hash($CALCOLOR) . '">[financial_calculator id="' . esc_html($post_id) . '" title="' . esc_html($title) . '"]</div>';
         ?>
         <style>
             .shortcodes {
