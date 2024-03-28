@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 function fincal_callback_financial_calculator($atts, $content = null) {
     global $PPATH;

@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 function fincal_create_financial_calculator_post_type() {
     $labels = array(
         'name' => 'Financial Calculators',

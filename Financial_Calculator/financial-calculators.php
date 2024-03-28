@@ -15,6 +15,8 @@
  */
 
 // Create the custom post type
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 require_once __DIR__.'/config.php';
 require_once __DIR__.'/shortcode/Backend.php';
 require_once __DIR__.'/shortcode/codes.php';
