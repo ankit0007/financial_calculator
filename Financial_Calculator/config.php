@@ -1,6 +1,11 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
 
-$plugin_folder_name = reset(explode('/', str_replace(WP_PLUGIN_DIR . '/', '', __DIR__)));;
+// Get the plugin folder name dynamically.
+$plugin_folder_name = basename( dirname( __DIR__ ) );
 
-$PPATH=plugin_dir_url($plugin_folder_name).$plugin_folder_name.'/';
+// Construct the plugin URL path.
+$PPATH = plugin_dir_url( __DIR__ ) . $plugin_folder_name . '/';
