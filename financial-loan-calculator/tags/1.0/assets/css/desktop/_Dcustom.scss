@@ -1,0 +1,147 @@
+.JAWNZQXODUZZWQ2,.DZKN2ZHMMZHMZCZ,.DY1ODFJMWQYZWI3{
+    &.mainbox{
+        border-radius: 1rem;
+        overflow: hidden !important;
+    }
+    .title{
+        padding: 0.5rem 2rem;
+        font-family: 'avenir';
+        font-weight: 600;
+    }
+    .note{
+        font-size: 10px;
+        font-family: 'montserrat';
+        position: absolute;
+        bottom: 1rem;
+        width: 90%;
+    }
+    width: 100%;
+    min-width: 100%;
+    color:$w;
+    .whitebox{
+        background: $w;
+        padding-left: 2rem;
+        .subheading{
+            color: $gr;
+            font-size: 1rem;
+            padding: 1rem 0;
+            font-weight: 300;
+            font-family: 'avenir';
+        }
+        .calculatorInner{
+            color:$bl;
+            padding-bottom: 0.5rem;
+            .col{
+                label{
+                    font-weight: 500;
+                }
+
+                &.btns{
+                    margin-right: 0rem !important;
+                }
+            }
+            label{
+                font-size: 0.9rem;
+                text-transform: capitalize;
+            }
+            input,select{
+                width: 100%;
+                font-size: 24px;
+                font-size: 22px;
+                padding: 7px 0px;
+                padding-left: 12px;
+                border-radius: 5px;
+                border: 2px solid $bl;
+                margin-top: 6px;
+            }
+            .btns{
+                label{
+                    color: transparent;
+                }
+
+                input{
+                    color: $w !important;
+                    padding: 0.8rem 0px;
+                    font-size: 12px;
+                    // padding-left: 12px;
+                    cursor: pointer;
+                }
+            }
+        }
+
+    }
+    .col20per{
+        padding: 0 1rem;
+        padding-bottom: 1.5rem !important;
+        position: relative;
+        >div{
+            .col-4{
+                font-weight: 700;
+            }
+            .col-8{
+                opacity: 0.7;
+            }
+
+        }
+    }
+    .copyrights{
+        color: $gr;
+        font-size: 11px;
+        padding-bottom: 1rem;
+        padding-top: 1rem;
+    }
+
+}
+.JAWNZQXODUZZWQ2{
+    background: $b;
+    &.mainbox{
+        box-shadow: 0 0 4px $b;
+    }
+    .calculatorInner{
+        input,select{
+            border-color: $b !important;
+        }
+        .btns{
+            input{
+                background: $b;
+                border-color: $b;
+            }
+        }
+    }
+}
+.DZKN2ZHMMZHMZCZ{
+    background: $o;
+    &.mainbox{
+        box-shadow: 0 0 4px $o;
+    }
+    .calculatorInner{
+        input,select{
+            border-color: $o !important;
+        }
+        .btns{
+            input{
+                background: $o;
+
+            }
+        }
+    }
+}
+.DY1ODFJMWQYZWI3{
+    background: $g;
+    &.mainbox{
+        box-shadow: 0 0 4px $g;
+    }
+
+    .calculatorInner{
+        input,select{
+            border-color: $g !important;
+        }
+        .btns{
+            input{
+                background: $g;
+
+            }
+        }
+    }
+
+}
