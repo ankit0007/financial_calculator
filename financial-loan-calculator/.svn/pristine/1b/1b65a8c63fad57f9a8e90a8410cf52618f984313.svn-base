@@ -5,8 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Get the plugin folder name dynamically.
-$fullPath = __DIR__;
-$folderName = basename($fullPath);
+echo 'Path:'.$plugin_folder_name = basename( dirname( __DIR__ ) );
 
 // Construct the plugin URL path.
-$PPATH = plugin_dir_url( __DIR__ ) . $folderName . '/';
+echo 'NewPath:'.$PPATH = plugin_dir_url( __DIR__ ) . $plugin_folder_name . '/';
