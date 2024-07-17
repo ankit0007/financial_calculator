@@ -1,5 +1,5 @@
 === Financial Calculators ===
-Contributors: wnt1987, wordpressdotorg, js, html, css, php
+Contributors: wnt1987, wordpressdotorg, java script
 Tags: Financial, Financial Calculator
 Requires at least: 6.1
 Tested up to: 6.5
@@ -91,10 +91,6 @@ Customizable for Your Audience:
 Professional and User-Friendly:
 - Project a professional image with sophisticated financial tools.
 - User-friendly design ensures accessibility for all.
-== Installation ==
-1. Put the plug-in folder into [wordpress_dir]/wp-content/plugins/
-2. Go into the WordPress admin interface and activate the plugin
-3. Optional: go to the options page and configure the plugin
 
 == Changelog ==
 
