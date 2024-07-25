@@ -24,7 +24,10 @@ jobs:
         rsync -av --delete --exclude '.git' ./financial-loan-calculator/ ./svn/trunk/
         cd ./svn/trunk/
         svn add --force .
-        svn delete --force $(svn status | grep '^!' | awk '{print $2}')
+        DELETED_FILES=$(svn status | grep '^!' | awk '{print $2}')
+        if [ ! -z "$DELETED_FILES" ]; then
+          svn delete --force $DELETED_FILES
+        fi
 
     - name: Commit and push changes to SVN
       run: |
