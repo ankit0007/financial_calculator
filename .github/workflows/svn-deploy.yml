@@ -1,0 +1,36 @@
+name: Deploy to WordPress SVN
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Git repository
+      uses: actions/checkout@v2
+
+    - name: Install Subversion
+      run: sudo apt-get install subversion
+
+    - name: Checkout SVN repository
+      run: svn checkout --depth immediates https://plugins.svn.wordpress.org/financial-loan-calculator ./svn
+
+    - name: Copy files to SVN trunk
+      run: |
+        rsync -av --delete --exclude '.git' ./financial-loan-calculator/ ./svn/trunk/
+        cd ./svn/trunk/
+        svn add --force .
+        svn delete --force $(svn status | grep '^!' | awk '{print $2}')
+
+    - name: Commit and push changes to SVN
+      run: |
+        cd ./svn/trunk/
+        svn commit -m "Deploying updates from GitHub" --username ${{ secrets.SVN_USERNAME }} --password ${{ secrets.SVN_PASSWORD }}
+
+    - name: Tag the new version in SVN
+      run: |
+        svn copy https://plugins.svn.wordpress.org/financial-loan-calculator/trunk https://plugins.svn.wordpress.org/financial-loan-calculator/tags/${{ github.sha }} -m "Tagging version ${{ github.sha }}" --username ${{ secrets.SVN_USERNAME }} --password ${{ secrets.SVN_PASSWORD }}
